@@ -1,0 +1,73 @@
+{% extends 'index.html'%}
+{% load static %}
+{% block title %}
+<title> Eshop | Cart page </title>
+{% endblock %}
+
+{% block content %}
+<div class="containner-fluid">
+	<h5 class="background text-light text-center mt-1 p-1"> Cart Page </h5>
+	<!-- table-responsive mein table horizontal scroll karega -->
+	<div class="table-responsive">
+		<table class="table table-striped table-bordered table-hover">
+			<tr>
+				<th></th>
+				<th>Name</th>
+				<th>Color</th>
+				<th>Size</th>
+				<th>Price</th>   
+				<th></th>
+				<th>Qty</th>
+				<th></th>
+				<th>Total</th>
+				<th>Maincategory</th>
+				<th>Subcategory</th>
+				<th>Brand</th>
+				<th></th>
+			</tr>
+			{% for i in cart %}
+			<tr>
+				<td><img src="{{i.pic}}" width="75px" height="50px" class="rouned" alt=""></td>
+				<td>{{i.name}}</td>
+				<td>{{i.color}}</td>
+				<td>{{i.size}}</td>
+				<td>{{i.price}}</td>
+				<td> <a href="/update-cart/{{i.pid}}/dec"><i class="bi bi-dash fs-3"></i></a></td>
+				<td>{{i.qty}}</td>
+				<td> <a href="/update-cart/{{i.pid}}/inc"><i class="bi bi-plus fs-3"></i></a></td>
+				<td>{{i.total}}</td>
+				<td>{{i.maincategory}}</td>
+				<td>{{i.subcategory}}</td>
+				<td>{{i.brand}}</td>
+				<td> <a href="/delete-cart/{{i.pid}}"><i class="bi bi-trash"></i></a></td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-12"></div>
+		<div class="col-md-6 col-12">
+			<table class="table table-striped table-bordered table-hover">
+				<tr>
+					<th>Total Amount</th>
+					<td>&#8377;{{total}}</td>
+				</tr>
+				<tr>
+					<th>Shipping Amount</th>
+					<td>&#8377;{{shipping}}</td>
+				</tr>
+				<tr>
+					<th>Final Amount</th>
+					<td>&#8377;{{final}}</td>
+				</tr>
+				<!--agar final amount hai to checkout button show hoga nhi to nhi show hoga isliye if block use kiye hai-->
+				{% if final %}
+				<tr>
+					<th colspan="2"><a href="/checkout" class="btn background text-light w-100 btn-sm">checkout</th>
+				</tr>
+				{% endif %}
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock %}
